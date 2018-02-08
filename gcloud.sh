@@ -1,8 +1,11 @@
 set -e
 
 # Re-install Gcloud from Scratch
-if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; curl https://sdk.cloud.google.com | bash; fi
-source /home/travis/google-cloud-sdk/path.bash.inc
+if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; fi
+curl -o google-cloud-sdk-187.0.0-linux-x86_64.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-187.0.0-linux-x86_64.tar.gz
+tar -czvf google-cloud-sdk-187.0.0-linux-x86_64.tar.gz $HOME/google-cloud-sdk
+$HOME/google-cloud-sdk/install.sh
+$HOME/google-cloud-sdk/google-cloud-sdk/bin/gcloud init
 gcloud version
 
 # Authenticate with Google Cloud
