@@ -4,7 +4,7 @@ set -e
 if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; fi
 pwd
 curl -o google-cloud-sdk-187.0.0-linux-x86_64.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-187.0.0-linux-x86_64.tar.gz
-tar -xzvf google-cloud-sdk-187.0.0-linux-x86_64.tar.gz
+tar -xzf google-cloud-sdk-187.0.0-linux-x86_64.tar.gz
 ./google-cloud-sdk/install.sh
 gcloud version
 
