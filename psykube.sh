@@ -3,7 +3,7 @@ set -e
 PSYKUBE_VERSION=${PSYKUBE_VERSION-1.9.3.0}
 
 # Update Docker
-# curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/docker.sh | bash
+curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/docker.sh | bash
 
 # Install Psykube
 export PSYKUBE_RELEASES_URL=https://api.github.com/repos/commercialtribe/psykube/releases/$PSYKUBE_VERSION
