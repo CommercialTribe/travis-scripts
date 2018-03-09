@@ -7,7 +7,12 @@ curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/maste
 
 # Install Psykube
 PSYKUBE_RELEASES_URL=https://api.github.com/repos/psykube/psykube/releases/tags/${PSYKUBE_VERSION}
-PSYKUBE_DOWNLOAD_URL=`curl -sSL ${PSYKUBE_RELEASES_URL} | jq -r '.assets[] | select(.name | contains("linux")).browser_download_url'`
+PSYKUBE_RELEASE_RESULTS=`curl -sSL ${PSYKUBE_RELEASES_URL}`
+
+# TODO Remove. Temporary debugging code.
+echo $PSYKUBE_RELEASE_RESULTS
+
+PSYKUBE_DOWNLOAD_URL=`echo $PSYKUBE_RELEASE_RESULTS | jq -r '.assets[] | select(.name | contains("linux")).browser_download_url'`
 curl -sSL ${PSYKUBE_DOWNLOAD_URL} | sudo tar -xzC /usr/local/bin
 
 # Install Kubectl
