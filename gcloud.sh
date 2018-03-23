@@ -18,6 +18,7 @@ echo "Decoding creds"
 echo ${GCLOUD_ENCODED_CREDS} | base64 -d > /tmp/gcloud.json
 echo "Activating service account"
 gcloud auth activate-service-account --key-file=/tmp/gcloud.json
+gcloud config set container/use_application_default_credentials true
 
 # Setup credentials for Google Cloud staging and production
 echo "Fetching cluster config"
