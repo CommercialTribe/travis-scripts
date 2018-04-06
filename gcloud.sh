@@ -26,5 +26,3 @@ gcloud container clusters get-credentials production --zone=us-east1-c --project
 
 # Authorize Docker
 gcloud docker --authorize-only
-
-kubectl config view > /dev/null
