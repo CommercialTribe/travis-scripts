@@ -13,13 +13,13 @@ if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then rm -rf ${HOME}/google-cloud-sdk
 source /home/travis/google-cloud-sdk/path.bash.inc
 gcloud version
 
+export CLOUDSDK_CONTAINER_USE_APPLICATION_DEFAULT_CREDENTIALS=false
+
 # Authenticate with Google Cloud
 echo "Decoding creds"
 echo ${GCLOUD_ENCODED_CREDS} | base64 -d > /tmp/gcloud.json
 echo "Activating service account"
 gcloud auth activate-service-account --key-file=/tmp/gcloud.json
-
-gcloud config set container/use_application_default_credentials true
 
 # Setup credentials for Google Cloud staging and production
 echo "Fetching cluster config"
