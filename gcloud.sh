@@ -26,3 +26,5 @@ gcloud container clusters get-credentials production --zone=us-east1-c --project
 
 # Authorize Docker
 gcloud docker --authorize-only
+
+gcloud config set container/use_application_default_credentials true
