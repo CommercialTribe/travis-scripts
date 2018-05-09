@@ -26,7 +26,3 @@ gcloud container clusters get-credentials production --zone=us-east1-c --project
 
 # Authorize Docker
 gcloud docker --authorize-only
-
-# Export k8s staging and production contexts for use in builds.
-export K8S_CONTEXT_STAGING=gke_commercial-tribe-staging_us-central1-a_staging
-export K8S_CONTEXT_PRODUCTION=gke_commercial-tribe_us-east1-c_production
