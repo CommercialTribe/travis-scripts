@@ -25,4 +25,4 @@ gcloud container clusters get-credentials staging --zone=us-central1-a --project
 gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
 
 # Authorize Docker
-gcloud docker --authorize-only
+gcloud auth configure-docker
