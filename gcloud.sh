@@ -1,3 +1,10 @@
+
+
+repo:^github\.com/CommercialTribe/travis-scripts$@7f207b0 
+Install Sourcegraph Server
+About
+ Help
+gcloud.sh
 set -e
 
 # Uncomment and use if specific gcloud version is needed.
@@ -12,14 +19,12 @@ echo "Installing gcloud"
 if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then rm -rf ${HOME}/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash > /dev/null; fi
 source /home/travis/google-cloud-sdk/path.bash.inc
 gcloud version
-gcloud components install docker-credential-gcr --quiet
 
 # Authenticate with Google Cloud
-GCLOUD_CREDS_PATH=/tmp/gcloud.json
 echo "Decoding creds"
-echo ${GCLOUD_ENCODED_CREDS} | base64 -d > ${GCLOUD_CREDS_PATH}
+echo ${GCLOUD_ENCODED_CREDS} | base64 -d > /tmp/gcloud.json
 echo "Activating service account"
-gcloud auth activate-service-account --key-file=${GCLOUD_CREDS_PATH}
+gcloud auth activate-service-account --key-file=/tmp/gcloud.json
 
 # Setup credentials for Google Cloud staging and production
 echo "Fetching cluster config"
@@ -27,5 +32,5 @@ gcloud container clusters get-credentials staging --zone=us-central1-a --project
 gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
 
 # Authorize Docker
-docker-credential-gcr configure-docker
-docker login -u _json_key --password-stdin https://gcr.io < ${GCLOUD_CREDS_PATH}
+gcloud docker --authorize-only
+# gcloud auth configure-docker
