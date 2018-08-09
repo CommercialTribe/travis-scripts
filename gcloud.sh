@@ -1,36 +1,57 @@
-
-
-repo:^github\.com/CommercialTribe/travis-scripts$@7f207b0 
-Install Sourcegraph Server
-About
- Help
-gcloud.sh
 set -e
 
-# Uncomment and use if specific gcloud version is needed.
-# GCLOUD_SDK_VERSION=187.0.0
-# export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
-# curl -o ${HOME}/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz
-# tar -xzf ${HOME}/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz
-# ${HOME}/google-cloud-sdk/install.sh -q
+echo "################################"
+echo "# Installing latest:           #"
+echo "#  - docker-ce (docker)        #"
+echo "#  - kubectl                   #"
+echo "#  - google-cloud-sdk (gcloud) #"
+echo "################################"
 
-# Re-install Gcloud from Scratch
-echo "Installing gcloud"
-if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then rm -rf ${HOME}/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash > /dev/null; fi
-source /home/travis/google-cloud-sdk/path.bash.inc
+# Setup google-cloud-sdk repo
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+# Setup kubectl repo
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo touch /etc/apt/sources.list.d/kubernetes.list
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+
+# Update the package list and install the Cloud SDK
+sudo apt-get update
+sudo apt-get install docker-ce google-cloud-sdk kubectl
+
+# Print version information
+echo ""
+echo "##########"
+echo "# docker #"
+echo "##########"
+docker version
+echo "##################"
+echo "# docker-compose #"
+echo "##################"
+docker-compose version
+echo "##########"
+echo "# gcloud #"
+echo "##########"
 gcloud version
+echo ""
+echo "#################################"
+echo "# Authorizing with Google Cloud #"
+echo "#################################"
+echo ""
 
-# Authenticate with Google Cloud
-echo "Decoding creds"
 echo ${GCLOUD_ENCODED_CREDS} | base64 -d > /tmp/gcloud.json
-echo "Activating service account"
 gcloud auth activate-service-account --key-file=/tmp/gcloud.json
 
+# Authorize Docker
+gcloud auth configure-docker
+docker login -u _json_key --password-stdin https://gcr.io < /tmp/gcloud.json
+
 # Setup credentials for Google Cloud staging and production
-echo "Fetching cluster config"
 gcloud container clusters get-credentials staging --zone=us-central1-a --project=commercial-tribe-staging
 gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
 
-# Authorize Docker
-gcloud docker --authorize-only
-# gcloud auth configure-docker
+echo "###########"
+echo "# kubectl #"
+echo "###########"
+kubectl version
