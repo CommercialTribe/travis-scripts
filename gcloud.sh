@@ -40,10 +40,6 @@ echo "##################"
 echo "# docker-compose #"
 echo "##################"
 docker-compose version
-echo "###########"
-echo "# kubectl #"
-echo "###########"
-kubectl version
 echo "##########"
 echo "# gcloud #"
 echo "##########"
@@ -60,6 +56,11 @@ gcloud auth activate-service-account --key-file=/tmp/gcloud.json
 # Setup credentials for Google Cloud staging and production
 gcloud container clusters get-credentials staging --zone=us-central1-a --project=commercial-tribe-staging
 gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
+
+echo "###########"
+echo "# kubectl #"
+echo "###########"
+kubectl version
 
 # Authorize Docker
 gcloud auth configure-docker
