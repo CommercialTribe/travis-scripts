@@ -1,7 +1,7 @@
 set -e
 
 # Install other docker, k8s deps and authorize on GCP
-curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/travis-test/gcloud.sh | bash
+curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/gcloud.sh | bash
 
 PSYKUBE_VERSION=v1.9.3.0
 

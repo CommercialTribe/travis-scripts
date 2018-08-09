@@ -1,7 +1,7 @@
 set -e
 
 # Install Psykube
-curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/travis-test/psykube.sh | bash
+curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/psykube.sh | bash
 
 # Install the provisioning script
 export FEATURE_NAMESPACES_RELEASES_URL=https://api.github.com/repos/commercialtribe/kubes-namespace-provisioner/releases/latest?access_token=$GITHUB_API_TOKEN
