@@ -1,10 +1,3 @@
-
-
-repo:^github\.com/CommercialTribe/travis-scripts$@7f207b0 
-Install Sourcegraph Server
-About
- Help
-gcloud.sh
 set -e
 
 # Uncomment and use if specific gcloud version is needed.
