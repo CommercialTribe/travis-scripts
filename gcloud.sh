@@ -33,4 +33,4 @@ gcloud container clusters get-credentials production --zone=us-east1-c --project
 
 # Authorize Docker
 gcloud auth configure-docker
-docker login -u _json_key --password-stdin https://gcr.io < gcloud.json
+docker login -u _json_key --password-stdin https://gcr.io < /tmp/gcloud.json
