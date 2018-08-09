@@ -1,5 +1,9 @@
 set -e
 
+# TODO Open issue on docker-gcr-cred repo about WARNING! Your password will be stored unencrypted in .../.docker/config.json
+# TODO See if we can install kubectl via apt-get instead of direct download
+# TODO See if we can install docker-compose via apt-get instead of direct download
+
 echo "Installing latest docker and gcloud"
 # Create environment variable for correct distribution
 export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
@@ -12,7 +16,8 @@ sudo apt-get update
 sudo apt-get install docker-ce google-cloud-sdk
 
 # Install latest docker-compose
-DOCKER_COMPOSE_VERSION=$(curl --silent "https://api.github.com/repos/docker/compose/releases/latest" | jq -r .tag_name)
+DOCKER_COMPOSE_RELEASE_URL=https://api.github.com/repos/docker/compose/releases/latest
+DOCKER_COMPOSE_VERSION=`curl -sSL -H "Authorization: token ${GITHUB_API_TOKEN}" ${DOCKER_COMPOSE_RELEASE_URL} | jq -r .tag_name`
 sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
@@ -21,6 +26,7 @@ echo "docker version"
 docker version
 echo "docker-compose version"
 docker-compose version
+# TODO kubectl version
 echo "gcloud version"
 gcloud version
 
