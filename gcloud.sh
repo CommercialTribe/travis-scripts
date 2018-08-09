@@ -43,10 +43,6 @@ echo ""
 echo ${GCLOUD_ENCODED_CREDS} | base64 -d > /tmp/gcloud.json
 gcloud auth activate-service-account --key-file=/tmp/gcloud.json
 
-# Authorize Docker
-gcloud auth configure-docker
-docker login -u _json_key --password-stdin https://gcr.io < /tmp/gcloud.json
-
 # Setup credentials for Google Cloud staging and production
 gcloud container clusters get-credentials staging --zone=us-central1-a --project=commercial-tribe-staging
 gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
@@ -55,3 +51,7 @@ echo "###########"
 echo "# kubectl #"
 echo "###########"
 kubectl version
+
+# Authorize Docker
+gcloud auth configure-docker
+docker login -u _json_key --password-stdin https://gcr.io < /tmp/gcloud.json
