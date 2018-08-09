@@ -2,9 +2,6 @@ set -e
 
 PSYKUBE_VERSION=v1.9.3.0
 
-# Install latest docker
-curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/travis-test/docker.sh | bash
-
 # Install Psykube
 PSYKUBE_RELEASES_URL=https://api.github.com/repos/psykube/psykube/releases/tags/${PSYKUBE_VERSION}
 PSYKUBE_RELEASE_RESULTS=`curl -sSL -H "Authorization: token ${GITHUB_API_TOKEN}" ${PSYKUBE_RELEASES_URL}`

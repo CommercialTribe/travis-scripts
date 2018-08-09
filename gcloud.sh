@@ -1,7 +1,6 @@
 set -e
 
-
-echo "Installing gcloud"
+echo "Installing latest gcloud and docker"
 # Create environment variable for correct distribution
 export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 # Add the Cloud SDK distribution URI as a package source
@@ -9,7 +8,20 @@ echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee 
 # Import the Google Cloud Platform public key
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 # Update the package list and install the Cloud SDK
-sudo apt-get update && sudo apt-get install google-cloud-sdk
+sudo apt-get update
+sudo apt-get install google-cloud-sdk docker-ce
+
+# Install latest docker-compose
+DOCKER_COMPOSE_VERSION=curl --silent "https://api.github.com/repos/docker/compose/releases/latest" | jq -r .tag_name
+sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Print version information
+echo "docker version"
+docker version
+echo "docker-compose version"
+docker-compose version
+echo "gcloud version"
 gcloud version
 
 # Authenticate with Google Cloud
