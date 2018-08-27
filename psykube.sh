@@ -1,21 +1,16 @@
 set -e
 
+# Install other docker, k8s deps and authorize on GCP
+curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/gcloud.sh | bash
+
+PSYKUBE_VERSION=v1.9.3.0
+
+echo ""
+echo "Installing psykube ${PSYKUBE_VERSION}"
+echo ""
+
 # Install Psykube
-curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/psykube.sh | bash
-
-NAMESPACE_PROVISIONER_VERSION=v1.1.3
-
-echo ""
-echo "Installing namespace provisioner ${NAMESPACE_PROVISIONER_VERSION}"
-echo ""
-
-# Install the provisioning script
-AUTHORIZATION_HEADER=Authorization: token ${GITHUB_API_TOKEN}
-ACCEPTED_HEADER=Accept: application/octet-stream
-
-NAMESPACE_PROVISIONER_RELEASE_URL=https://api.github.com/repos/commercialtribe/kubes-namespace-provisioner/releases/tags/${NAMESPACE_PROVISIONER_VERSION}
-NAMESPACE_PROVISIONER_DOWNLOAD_URL=`curl -sSL -H ${AUTHORIZATION_HEADER} ${NAMESPACE_PROVISIONER_RELEASE_URL} | jq -r '.assets[] | select(.name | contains("linux")).url'`
-
-curl -sSL -H ${AUTHORIZATION_HEADER} -H ${ACCEPTED_HEADER} -o kubes-namespace-provisioner ${NAMESPACE_PROVISIONER_DOWNLOAD_URL}
-chmod +x ./kubes-namespace-provisioner
-sudo mv ./kubes-namespace-provisioner /usr/local/bin/kubes-namespace-provisioner
+PSYKUBE_RELEASES_URL=https://api.github.com/repos/psykube/psykube/releases/tags/${PSYKUBE_VERSION}
+PSYKUBE_RELEASE_RESULTS=`curl -sSL -H "Authorization: token ${GITHUB_API_TOKEN}" ${PSYKUBE_RELEASES_URL}`
+PSYKUBE_DOWNLOAD_URL=`echo $PSYKUBE_RELEASE_RESULTS | jq -r '.assets[] | select(.name | contains("linux")).browser_download_url'`
+curl -sSL ${PSYKUBE_DOWNLOAD_URL} | sudo tar -xzC /usr/local/bin
