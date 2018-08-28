@@ -5,9 +5,9 @@ curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/maste
 
 PSYKUBE_VERSION=v1.9.3.0
 
-echo ""
-echo "Installing psykube ${PSYKUBE_VERSION}"
-echo ""
+echo "#########################################"
+echo "# Installing psykube ${PSYKUBE_VERSION} #"
+echo "#########################################"
 
 # Install Psykube
 PSYKUBE_RELEASES_URL=https://api.github.com/repos/psykube/psykube/releases/tags/${PSYKUBE_VERSION}
