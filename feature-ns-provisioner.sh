@@ -5,9 +5,9 @@ curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/maste
 
 NAMESPACE_PROVISIONER_VERSION=v1.2.0
 
-echo ""
-echo "Installing namespace provisioner ${NAMESPACE_PROVISIONER_VERSION}"
-echo ""
+echo "#####################################################################"
+echo "# Installing namespace provisioner ${NAMESPACE_PROVISIONER_VERSION} #"
+echo "#####################################################################"
 
 # Install the provisioning script
 AUTHORIZATION_HEADER="Authorization: token ${GITHUB_API_TOKEN}"
