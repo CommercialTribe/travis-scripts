@@ -3,7 +3,7 @@ set -e
 # Install Psykube
 curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/psykube.sh | bash
 
-NAMESPACE_PROVISIONER_VERSION=${NAMESPACE_PROVISIONER_VERSION:-v1.2.3}
+NAMESPACE_PROVISIONER_VERSION=${NAMESPACE_PROVISIONER_VERSION:-v1.2.4}
 
 echo "#####################################################################"
 echo "# Installing namespace provisioner ${NAMESPACE_PROVISIONER_VERSION} #"
