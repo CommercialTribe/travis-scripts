@@ -1,6 +1,6 @@
 set -e
 
-GOOGLE_CLOUD_SDK_VERSION=216.0.0
+GOOGLE_CLOUD_SDK_VERSION=216.0.0-0
 
 echo "################################"
 echo "# Installing latest:           #"
