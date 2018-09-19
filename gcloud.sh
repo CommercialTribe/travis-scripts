@@ -1,7 +1,5 @@
 set -e
 
-GOOGLE_CLOUD_SDK_VERSION=216.0.0-0
-
 echo "################################"
 echo "# Installing latest:           #"
 echo "#  - docker-ce (docker)        #"
@@ -21,7 +19,7 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/a
 
 # Update the package list and install the Cloud SDK
 sudo apt-get update
-sudo apt-get install docker-ce google-cloud-sdk kubectl
+sudo apt-get install docker-ce google-cloud-sdk=216.0.0-0 kubectl
 
 # Print version information
 echo ""
