@@ -7,9 +7,6 @@ echo "#  - kubectl                   #"
 echo "#  - google-cloud-sdk (gcloud) #"
 echo "################################"
 
-# Upgrade dpkg to >= 1.17.5ubuntu5.8, which fixes https://bugs.launchpad.net/ubuntu/+source/dpkg/+bug/1730627
-sudo apt-get install -y dpkg
-
 # Setup google-cloud-sdk repo
 export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -21,6 +18,8 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/a
 
 # Update the package list and install the Cloud SDK
 sudo apt-get update
+# Upgrade dpkg to >= 1.17.5ubuntu5.8, which fixes https://bugs.launchpad.net/ubuntu/+source/dpkg/+bug/1730627
+sudo apt-get install -y dpkg
 sudo apt-get install docker-ce google-cloud-sdk kubectl
 
 # Print version information
