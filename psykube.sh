@@ -3,7 +3,7 @@ set -e
 # Install other docker, k8s deps and authorize on GCP
 curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/gcloud.sh | bash
 
-PSYKUBE_VERSION=v1.9.3.0
+PSYKUBE_VERSION=${PSYKUBE_VERSION:-v1.9.3.0}
 
 echo "#########################################"
 echo "# Installing psykube ${PSYKUBE_VERSION} #"
