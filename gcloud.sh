@@ -48,10 +48,10 @@ gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS
 
 # Setup credentials for Google Cloud staging and production and export contexts
 gcloud container clusters get-credentials staging --zone=us-central1-a --project=commercial-tribe-staging
-export K8S_CONTEXT_STAGING==$(kubectl config current-context)
+export K8S_CONTEXT_STAGING=$(kubectl config current-context)
 
 gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
-export K8S_CONTEXT_PRODUCTION==$(kubectl config current-context)
+export K8S_CONTEXT_PRODUCTION=$(kubectl config current-context)
 
 echo "###########"
 echo "# kubectl #"
