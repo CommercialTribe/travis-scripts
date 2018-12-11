@@ -42,13 +42,16 @@ echo "# Authorizing with Google Cloud #"
 echo "#################################"
 echo ""
 
-export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud.json
+GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud.json
 echo ${GCLOUD_ENCODED_CREDS} | base64 -d > ${GOOGLE_APPLICATION_CREDENTIALS}
 gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
 
 # Setup credentials for Google Cloud staging and production
-gcloud container clusters get-credentials staging --zone=us-central1-a --project=commercial-tribe-staging
-gcloud container clusters get-credentials production --zone=us-east1-c --project=commercial-tribe
+K8S_CLUSTER_STAGING=${K8S_CLUSTER_STAGING:-staging}
+K8S_CLUSTER_PRODUCTION=${K8S_CLUSTER_PRODUCTION:-production}
+
+gcloud container clusters get-credentials ${K8S_CLUSTER_STAGING} --zone=us-central1-a --project=commercial-tribe-staging
+gcloud container clusters get-credentials ${K8S_CLUSTER_PRODUCTION} --zone=us-east1-c --project=commercial-tribe
 
 echo "###########"
 echo "# kubectl #"
