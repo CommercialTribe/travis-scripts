@@ -27,3 +27,5 @@ IMAGE_ASSESSMENT_API=${imageAssessmentApiLatest} docker-compose -f ${dockerCompo
 
 echo "Running e2e tests"
 docker-compose -f ${dockerComposeFile} run e2e
+
+echo "Assessment End-To-End Tests Done"
