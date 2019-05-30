@@ -9,18 +9,18 @@ echo " assessment-api: ${IMAGE_ASSESSMENT_API}"
 # TODO Replace with latest image
 imageAssessmentApiLatest="${DOCKER_BASE_IMAGE_PATH}/assessment-api:feature-e2e"
 
-authHeader=`Authorization: token ${GITHUB_API_TOKEN}`
+authHeader="Authorization: token ${GITHUB_API_TOKEN}"
 acceptHeader='Accept: application/vnd.github.v3.raw'
 githubUrlPrefix=https://api.github.com/repos/CommercialTribe
 dockerComposeFile=docker-compose-e2e.yml
 
 echo "Getting ${dockerComposeFile}"
 dockerComposeE2e="${githubUrlPrefix}/assessment-e2e/contents/docker-compose-e2e.yml"
-curl -h ${authHeader} -h ${acceptHeader} -l ${dockerComposeE2e} > ${dockerComposeFile}
+curl -h ${authHeader} -h ${acceptHeader} -L ${dockerComposeE2e} > ${dockerComposeFile}
 
 echo "Getting assessment-api .env.docker"
 assessmentApiEnv="${githubUrlPrefix}/assessment-api/contents/.env.docker"
-curl -h ${authHeader} -h ${acceptHeader} -l ${assessmentApiEnv} > assessnent-api.env
+curl -h ${authHeader} -h ${acceptHeader} -L ${assessmentApiEnv} > assessnent-api.env
 
 echo "Bootstrapping db"
 IMAGE_ASSESSMENT_API=${IMAGE_ASSESSMENT_API} docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
