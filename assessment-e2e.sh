@@ -20,7 +20,7 @@ curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${dockerComposeE2e} > ${docker
 
 echo "Getting assessment-api .env.docker"
 assessmentApiEnv="${githubUrlPrefix}/assessment-api/contents/.env.docker"
-curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${assessmentApiEnv} > assessnent-api.env
+curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${assessmentApiEnv} > assessment-api.env
 
 echo "Bootstrapping db"
 IMAGE_ASSESSMENT_API=${IMAGE_ASSESSMENT_API} docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
