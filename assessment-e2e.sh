@@ -16,11 +16,11 @@ dockerComposeFile=docker-compose-e2e.yml
 
 echo "Getting ${dockerComposeFile}"
 dockerComposeE2e="${githubUrlPrefix}/assessment-e2e/contents/docker-compose-e2e.yml"
-curl -h ${authHeader} -h ${acceptHeader} -L ${dockerComposeE2e} > ${dockerComposeFile}
+curl -H ${authHeader} -H ${acceptHeader} -L ${dockerComposeE2e} > ${dockerComposeFile}
 
 echo "Getting assessment-api .env.docker"
 assessmentApiEnv="${githubUrlPrefix}/assessment-api/contents/.env.docker"
-curl -h ${authHeader} -h ${acceptHeader} -L ${assessmentApiEnv} > assessnent-api.env
+curl -H ${authHeader} -H ${acceptHeader} -L ${assessmentApiEnv} > assessnent-api.env
 
 echo "Bootstrapping db"
 IMAGE_ASSESSMENT_API=${IMAGE_ASSESSMENT_API} docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
