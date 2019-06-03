@@ -6,8 +6,7 @@ echo " assessment-e2e: ${IMAGE_E2E}"
 echo " assessment-frontend: ${IMAGE_ASSESSMENT_FRONTEND}"
 echo " assessment-api: ${IMAGE_ASSESSMENT_API}"
 
-# TODO Replace with latest image
-imageAssessmentApiLatest="${DOCKER_BASE_IMAGE_PATH}/assessment-api:feature-e2e"
+imageAssessmentApiLatest="${DOCKER_BASE_IMAGE_PATH}/assessment-api:latest"
 
 authHeader="Authorization: token ${GITHUB_API_TOKEN}"
 acceptHeader='Accept: application/vnd.github.v3.raw'
