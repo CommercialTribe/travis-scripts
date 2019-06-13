@@ -14,7 +14,7 @@ githubUrlPrefix=https://api.github.com/repos/CommercialTribe
 dockerComposeFile=docker-compose-e2e.yml
 
 echo "Getting ${dockerComposeFile}"
-dockerComposeE2e="${githubUrlPrefix}/assessment-e2e/contents/docker-compose-e2e.yml"
+dockerComposeE2e="${githubUrlPrefix}/assessment-e2e/contents/${dockerComposeFile}"
 curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${dockerComposeE2e} > ${dockerComposeFile}
 
 echo "Getting assessment-api .env.docker"
