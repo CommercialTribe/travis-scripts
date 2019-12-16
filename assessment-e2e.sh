@@ -32,13 +32,14 @@ IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" docker-compose -f ${dockerCom
 echo "Running e2e tests"
 set +e
 docker-compose -f ${dockerComposeFile} run e2e
-if [ $? -ne 0 ]
+e2eExitCode=$?
+if [ ${e2eExitCode} -ne 0 ]
 then
   set -e
   echo "e2e tests failed. Writing assessment-api logs for upload to S3"
   mkdir -p ${e2eLogsDirPath}
-  docker logs ${assessmentApiContainerName} > "${assessmentApiContainerName}.txt"
-  exit $?
+  docker logs ${assessmentApiContainerName} > "${e2eLogsDirPath}/${assessmentApiContainerName}.txt"
+  exit ${e2eExitCode}
 fi
 
 set -e
