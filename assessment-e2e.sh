@@ -28,10 +28,7 @@ curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${assessmentApiEnv} > assessme
 
 # Init and run tests
 echo "Bootstrapping db"
-# FIXME Workaround for https://github.com/docker/compose/issues/7097
-sudo apt-get update
-sudo apt-get install expect-dev
-IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
+IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" docker-compose -f ${dockerComposeFile} run -T assessment-api yarn db:bootstrap
 
 echo "Running e2e tests"
 set +e
