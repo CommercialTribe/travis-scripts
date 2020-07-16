@@ -33,8 +33,9 @@ sudo apt-get update
 sudo apt-get install expect-dev
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
 
-echo "Running migrations"
-unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:migrate
+# TODO Enable when https://github.com/CommercialTribe/assessment-api/pull/969 is merged
+# echo "Running migrations"
+# unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:migrate
 
 echo "Running e2e tests"
 set +e
