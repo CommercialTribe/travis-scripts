@@ -60,7 +60,7 @@ kubectl version
 
 # Authorize Docker Hub
 if [ -n "${DOCKER_HUB_USERNAME}" ] && [ -n "${DOCKER_HUB_ACCESS_TOKEN}" ]; then
-  docker login --username ${DOCKER_HUB_USERNAME} --password-stdin < ${DOCKER_HUB_ACCESS_TOKEN}
+  echo "${DOCKER_HUB_ACCESS_TOKEN}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
 else
   echo "Missing DOCKER_HUB_USERNAME or DOCKER_HUB_ACCESS_TOKEN, skipping authentication with Docker Hub"
 fi
