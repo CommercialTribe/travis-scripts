@@ -58,6 +58,9 @@ echo "# kubectl #"
 echo "###########"
 kubectl version
 
-# Authorize Docker
+# Authorize Docker Hub
+docker login --username ${DOCKER_HUB_USERNAME} --password-stdin < ${DOCKER_HUB_ACCESS_TOKEN}
+
+# Authorize GCP Docker
 gcloud auth configure-docker
 docker login -u _json_key --password-stdin https://gcr.io < ${GOOGLE_APPLICATION_CREDENTIALS}
