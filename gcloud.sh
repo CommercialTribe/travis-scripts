@@ -59,7 +59,11 @@ echo "###########"
 kubectl version
 
 # Authorize Docker Hub
-docker login --username ${DOCKER_HUB_USERNAME} --password-stdin < ${DOCKER_HUB_ACCESS_TOKEN}
+if [[ -z "${DOCKER_HUB_USERNAME}" && -z "${DOCKER_HUB_ACCESS_TOKEN}" ]]; then
+  docker login --username ${DOCKER_HUB_USERNAME} --password-stdin < ${DOCKER_HUB_ACCESS_TOKEN}
+else
+  echo "Missing DOCKER_HUB_USERNAME or DOCKER_HUB_ACCESS_TOKEN, skipping authentication with Docker Hub"
+fi
 
 # Authorize GCP Docker
 gcloud auth configure-docker
