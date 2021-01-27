@@ -68,6 +68,3 @@ fi
 # Authorize GCP Docker
 gcloud auth configure-docker
 docker login -u _json_key --password-stdin https://gcr.io < ${GOOGLE_APPLICATION_CREDENTIALS}
-
-# Set BigQuery CI Dataset name
-export BIGQUERY_DATASET_CI="assessment_${TRAVIS_BRANCH}_${TRAVIS_BUILD_NUMBER}_${RANDOM}"
