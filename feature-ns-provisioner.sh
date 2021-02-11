@@ -3,7 +3,7 @@ set -e
 # Install gcloud
 curl -sSL https://raw.githubusercontent.com/CommercialTribe/travis-scripts/master/gcloud.sh | bash
 
-NAMESPACE_PROVISIONER_VERSION=${NAMESPACE_PROVISIONER_VERSION:-v4.0.2}
+NAMESPACE_PROVISIONER_VERSION=${NAMESPACE_PROVISIONER_VERSION:-v5.0.0}
 
 echo "#####################################################################"
 echo "# Installing namespace provisioner ${NAMESPACE_PROVISIONER_VERSION} #"
