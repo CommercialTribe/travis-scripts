@@ -12,7 +12,7 @@ imageAssessmentApiLatest="${DOCKER_BASE_IMAGE_PATH}/assessment-api:latest"
 assessmentApiContainerName=e2e-assessment-api
 e2eLogsDirPath=e2e/logs
 
-authHeader="Authorization: token ${GITHUB_API_TOKEN}"
+authHeader="Authorization: token ${GH_API_TOKEN}"
 acceptHeader='Accept: application/vnd.github.v3.raw'
 githubUrlPrefix=https://api.github.com/repos/CommercialTribe
 dockerComposeFile=docker-compose-e2e.yml
