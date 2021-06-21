@@ -19,6 +19,7 @@ dockerComposeFile=docker-compose-e2e.yml
 
 # Download needed files
 echo "Getting ${dockerComposeFile}"
+echo "${GH_API_TOKEN}"
 dockerComposeE2e="${githubUrlPrefix}/assessment-e2e/contents/${dockerComposeFile}"
 curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${dockerComposeE2e} > ${dockerComposeFile}
 cat ${dockerComposeFile}
