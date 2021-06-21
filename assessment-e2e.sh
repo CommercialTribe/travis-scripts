@@ -21,6 +21,7 @@ dockerComposeFile=docker-compose-e2e.yml
 echo "Getting ${dockerComposeFile}"
 dockerComposeE2e="${githubUrlPrefix}/assessment-e2e/contents/${dockerComposeFile}"
 curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${dockerComposeE2e} > ${dockerComposeFile}
+cat ${dockerComposeFile}
 
 echo "Getting assessment-api .env.docker"
 assessmentApiEnv="${githubUrlPrefix}/assessment-api/contents/.env.docker"
