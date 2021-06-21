@@ -25,6 +25,7 @@ curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${dockerComposeE2e} > ${docker
 echo "Getting assessment-api .env.docker"
 assessmentApiEnv="${githubUrlPrefix}/assessment-api/contents/.env.docker"
 curl -H "${authHeader}" -H "${acceptHeader}" -sSL ${assessmentApiEnv} > assessment-api.env
+cat assessment-api.env
 
 # Init and run tests
 echo "Bootstrapping db"
