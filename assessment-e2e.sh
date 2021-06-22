@@ -32,11 +32,11 @@ echo "Bootstrapping db"
 # FIXME Workaround for https://github.com/docker/compose/issues/7097
 sudo apt-get update
 sudo apt-get install expect-dev
-docker-compose -f ${dockerComposeFile} run -d --name rabbit rabbitmq
-sleep 30
-docker logs rabbit
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:ready 7
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:terraform
+docker logs assessment-api_rabbitmq_1
+sleep 30
+docker logs assessment-api_rabbitmq_1
 docker ps
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:seed
 
