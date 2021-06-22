@@ -32,7 +32,10 @@ echo "Bootstrapping db"
 # FIXME Workaround for https://github.com/docker/compose/issues/7097
 sudo apt-get update
 sudo apt-get install expect-dev
-IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
+IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:ready 7
+IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:terraform
+docker ps
+IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:seed
 
 echo "Running migrations"
 unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:migrate
