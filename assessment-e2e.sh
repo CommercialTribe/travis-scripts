@@ -33,6 +33,7 @@ echo "Bootstrapping db"
 sudo apt-get update
 sudo apt-get install expect-dev
 docker-compose -f ${dockerComposeFile} run -d -p 5672:5672 rabbitmq
+sleep 30
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:ready 7
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:terraform
 docker ps
