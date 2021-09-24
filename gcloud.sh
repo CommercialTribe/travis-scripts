@@ -20,7 +20,7 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/a
 sudo apt-get update
 # Upgrade dpkg to >= 1.17.5ubuntu5.8, which fixes https://bugs.launchpad.net/ubuntu/+source/dpkg/+bug/1730627
 sudo apt-get install -qq -y dpkg
-sudo apt-get install docker-ce google-cloud-sdk kubectl
+sudo apt-get install docker-ce docker-ce-cli containerd.io google-cloud-sdk kubectl
 
 # Print version information
 echo ""
