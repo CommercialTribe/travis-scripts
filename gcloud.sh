@@ -20,7 +20,17 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/a
 sudo apt-get update
 # Upgrade dpkg to >= 1.17.5ubuntu5.8, which fixes https://bugs.launchpad.net/ubuntu/+source/dpkg/+bug/1730627
 sudo apt-get install -qq -y dpkg
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io google-cloud-sdk kubectl
+# https://docs.docker.com/engine/install/ubuntu/
+sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+# add docker's official GPG Key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# Setup a stable repository
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y google-cloud-sdk kubectl
 
 # Print version information
 echo ""
