@@ -31,6 +31,9 @@ echo "Bootstrapping db"
 # FIXME Workaround for https://github.com/docker/compose/issues/7097
 sudo apt-get update
 sudo apt-get install expect-dev
+# Workaround to make rabbitmq complete the booting process 
+IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn -v
+sleep 30
 IMAGE_ASSESSMENT_API="${imageAssessmentApiLatest}" unbuffer docker-compose -f ${dockerComposeFile} run assessment-api yarn db:bootstrap
 
 echo "Running migrations"
