@@ -33,6 +33,9 @@ sudo apt-get update
 sudo apt install -y docker.io
 sudo apt-get install -y google-cloud-sdk kubectl
 
+sudo systemctl start docker
+sudo systemctl enable docker
+
 # Print version information
 echo ""
 echo "##########"
