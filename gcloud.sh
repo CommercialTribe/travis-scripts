@@ -31,7 +31,10 @@ echo \
 sudo apt-get update
 # sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo apt install -y docker.io
-sudo apt-get install -y google-cloud-sdk kubectl
+sudo apt-get install -y google-cloud-sdk google-cloud-sdk-gke-gcloud-auth-plugin kubectl
+sudo apt-get -y update && sudo apt-get --only-upgrade -y  install google-cloud-sdk-nomos kubectl google-cloud-sdk-cloud-build-local google-cloud-sdk-app-engine-java google-cloud-sdk-datalab google-cloud-sdk-spanner-emulator google-cloud-sdk-package-go-module google-cloud-sdk-minikube google-cloud-sdk-firestore-emulator google-cloud-sdk-datastore-emulator google-cloud-sdk-bigtable-emulator google-cloud-sdk google-cloud-sdk-pubsub-emulator google-cloud-sdk-gke-gcloud-auth-plugin google-cloud-sdk-anthos-auth google-cloud-sdk-harbourbridge google-cloud-sdk-cbt google-cloud-sdk-app-engine-python google-cloud-sdk-local-extract google-cloud-sdk-cloud-run-proxy google-cloud-sdk-skaffold google-cloud-sdk-config-connector google-cloud-sdk-app-engine-go google-cloud-sdk-log-streaming google-cloud-sdk-kpt google-cloud-sdk-app-engine-python-extras google-cloud-sdk-kubectl-oidc google-cloud-sdk-app-engine-grpc google-cloud-sdk-terraform-tools
+
+
 
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -63,6 +66,8 @@ gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS
 # Setup credentials for Google Cloud staging and production
 K8S_CLUSTER_STAGING=${K8S_CLUSTER_STAGING:-staging}
 K8S_CLUSTER_PRODUCTION=${K8S_CLUSTER_PRODUCTION:-production}
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 gcloud container clusters get-credentials ${K8S_CLUSTER_STAGING} --zone=us-central1-a --project=commercial-tribe-staging
 gcloud container clusters get-credentials ${K8S_CLUSTER_PRODUCTION} --zone=us-east1-c --project=commercial-tribe
